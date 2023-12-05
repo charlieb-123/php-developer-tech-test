@@ -1,21 +1,32 @@
 {% extends 'app.twig' %}
+{% block title %}
+    <title>Matcher: Results</title>
+{% endblock %}
 
-<h1>Results</h1>
+{% block content %}
 
-<p>You matched with <!-- NUMBER OF COMPANIES MATCHED --> </p>
+<div class="content-container">
+    <main>
+        <header>
+            <h1>Results</h1>
+            <p>You matched with {{ matchedCompanyCount }} compan{{ matchedCompanyCount == 1 ? 'y' : 'ies' }}</p>
+        </header>
 
-<div class="matches">
-    {% for company in matchedCompanies %}
-        <div class="matches__match">
-            <h3>{{ company.name }}</h3>
-            <p>{{ company.description }}</p>
-            <a href="#" class="matches__match__more">more</a>
+        <section class="matches">
+            {% for company in matchedCompanies %}
+                <article class="match">
+                    <h2>{{ company.name }}</h2>
+                    <p>{{ company.description }}</p>
+                    <a href="#" class="matches__match__more">More</a>
 
-            <div class="match__match__details" style="display:none">
-                <p><strong>Email:</strong> {{ company.email }}</p>
-                <p><strong>Phone:</strong> {{ company.phone }}</p>
-                <p><strong>Website:</strong> {{ company.website }}</p>
-            </div>
-        </div>
-    {% endfor %}
+                    <div class="match__details" style="display:none">
+                        <p><strong>Email:</strong> <a href="mailto:{{ company.email }}">{{ company.email }}</a></p>
+                        <p><strong>Phone:</strong> <a href="tel:{{ company.phone }}">{{ company.phone }}</a></p>
+                        <p><strong>Website:</strong> <a href="{{ company.website }}" target="_blank" rel="noopener">{{ company.website }}</a></p>
+                    </div>
+                </article>
+            {% endfor %}
+        </section>
+    </main>
 </div>
+{% endblock %}

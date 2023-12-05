@@ -1,6 +1,17 @@
 {% extends 'app.twig' %}
 
+{% block title %}
+    <title>Matcher: Please provide your details</title>
+{% endblock %}
+
+{% block content %}
 <form name="form" method="post">
+	{% if error == true and inArea == false %}
+		<p class="error">Sorry, It looks like we don't currently cover your area.</p>
+	{% endif %}
+	{% if error == true and inArea != false %}
+		<p class="error">Sorry, There was an error with your submission, please try again.</p>
+	{% endif %}
 	<fieldset>
 		<legend>Contact Details</legend>
 		<p>
@@ -143,3 +154,4 @@
 		<input type="submit" name="compare" value="Compare Now">
 	</p>
 </form>
+{% endblock %}
