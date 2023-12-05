@@ -7,7 +7,7 @@ use App\Service\FormValidation;
 
 class FormController extends Controller
 {
-    
+
     public function index()
     {
         echo $this->render('form.twig');
@@ -15,11 +15,11 @@ class FormController extends Controller
 
     public function submit()
     {
-        $validator = new FormValidation($this->settings());
+        $validator = new FormValidation($this->settings(), $this->db());
         $bedrooms = $validator->validateBedrooms($_POST['bedrooms']);
         $surveyType = $validator->validateSurveyType($_POST['type']);
-        $postcodePrefix = $validator->extractPostcodePrefix($_POST['postcode']);
 
+        $postcodePrefix = $validator->extractPostcodePrefix($_POST['postcode']);
         if (!$bedrooms || !$surveyType || !$postcodePrefix) {
             echo $this->render('form.twig', [
                 'error' => true,
