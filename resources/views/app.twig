@@ -1,9 +1,14 @@
 <html>
-    <head></head>
+    <head>
+    {% block title %}
+        <title>Matcher</title>
+    {% endblock %}
+    <link href="assets/css/style.css" rel="stylesheet">
+    </head>
 
     <body>
         {% block content %}{% endblock %}
+      
     </body>
-
-    <script src="/assets/js/app.js"></script>
+  <script src="/assets/js/app.js"></script>
 </html>
